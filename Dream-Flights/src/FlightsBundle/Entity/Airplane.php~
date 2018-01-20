@@ -1,0 +1,72 @@
+<?php
+
+namespace FlightsBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Airplane
+ *
+ * @ORM\Table(name="airplane")
+ * @ORM\Entity(repositoryClass="FlightsBundle\Repository\AirplaneRepository")
+ */
+class Airplane
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+
+    /**
+     * @ORM\Column(name= "name", type="string", length=300)
+     *
+     */
+    private $name;
+
+    /**
+     * @ORM\Column(name="production", type="date")
+     */
+    private $production;
+
+    /**
+     * @ORM\Column(name="manufacturer", type="string", length=600)
+     */
+    private $manufacturer;
+
+    /**
+     * @ORM\Column(name="model", type="string", length=300)
+     */
+    private $model;
+
+    /**
+     * @ORM\Column(name="max_passanger", type="integer")
+     */
+    private $maxPassanger;
+
+
+    /**
+     * @ORM\Column(name="max_carr_capacity_in_tons", type="integer")
+     */
+    private $maxCarrCapacityInTons;
+
+
+
+    
+
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+}
+
