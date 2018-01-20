@@ -2,6 +2,7 @@
 
 namespace FlightsBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -12,6 +13,18 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Airplane
 {
+    /**
+     * @ORM\OneToMany(targetEntity="AirplaneHistory", mappedBy="airplane")
+     */
+    private $airplaneHistories;
+
+    public function __construct()
+    {
+        $this->airplaneHistories = new ArrayCollection();
+        $this->production = new \DateTime();
+    }
+
+
     /**
      * @var int
      *
