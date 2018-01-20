@@ -4,6 +4,8 @@ namespace FlightsBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use FlightsBundle\Entity\User;
 
 /**
  * Airplane
@@ -24,6 +26,12 @@ class Airplane
         $this->production = new \DateTime();
     }
 
+    /**
+     * @ORM\OneToOne(targetEntity="User", inversedBy="airplane")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    private $user;
+
 
     /**
      * @var int
@@ -36,34 +44,63 @@ class Airplane
 
 
     /**
-     * @ORM\Column(name= "name", type="string", length=300)
+     * @ORM\Column(name= "name", type="string")
      *
+     * @Assert\Length(
+     *      min = 3,
+     *      max = 300,
+     *      minMessage = "Name of airplane must be at least {{ limit }} characters long",
+     *      maxMessage = "Name of airplane cannot be longer than {{ limit }} characters"
+     * )
      */
     private $name;
 
     /**
      * @ORM\Column(name="production", type="date")
+     *
      */
     private $production;
 
     /**
-     * @ORM\Column(name="manufacturer", type="string", length=600)
+     * @ORM\Column(name="manufacturer", type="string")
+     *
+     * @Assert\Length(
+     *      min = 3,
+     *      max = 500,
+     *      minMessage = "Name of manufacturer must be at least {{ limit }} characters long",
+     *      maxMessage = "Name of manufacturer cannot be longer than {{ limit }} characters"
+     * )
      */
     private $manufacturer;
 
     /**
-     * @ORM\Column(name="model", type="string", length=300)
+     * @ORM\Column(name="model", type="string")
+     *
+     * @Assert\Length(
+     *      min = 3,
+     *      max = 300,
+     *      minMessage = "Name of model must be at least {{ limit }} characters long",
+     *      maxMessage = "Name of model cannot be longer than {{ limit }} characters"
+     * )
      */
     private $model;
 
     /**
      * @ORM\Column(name="max_passanger", type="integer")
+     *
+     * @Assert\GreaterThan(
+     *     value = 0
+     * )
      */
     private $maxPassanger;
 
 
     /**
      * @ORM\Column(name="max_carr_capacity_in_tons", type="integer")
+     *
+     * @Assert\GreaterThan(
+     *     value = 0
+     * )
      */
     private $maxCarrCapacityInTons;
 
@@ -224,5 +261,63 @@ class Airplane
     public function getMaxCarrCapacityInTons()
     {
         return $this->maxCarrCapacityInTons;
+    }
+
+    /**
+     * Add airplaneHistory
+     *
+     * @param \FlightsBundle\Entity\AirplaneHistory $airplaneHistory
+     *
+     * @return Airplane
+     */
+    public function addAirplaneHistory(\FlightsBundle\Entity\AirplaneHistory $airplaneHistory)
+    {
+        $this->airplaneHistories[] = $airplaneHistory;
+
+        return $this;
+    }
+
+    /**
+     * Remove airplaneHistory
+     *
+     * @param \FlightsBundle\Entity\AirplaneHistory $airplaneHistory
+     */
+    public function removeAirplaneHistory(\FlightsBundle\Entity\AirplaneHistory $airplaneHistory)
+    {
+        $this->airplaneHistories->removeElement($airplaneHistory);
+    }
+
+    /**
+     * Get airplaneHistories
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getAirplaneHistories()
+    {
+        return $this->airplaneHistories;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \FlightsBundle\Entity\User $user
+     *
+     * @return Airplane
+     */
+    public function setUser(\FlightsBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \FlightsBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

@@ -3,6 +3,7 @@
 namespace FlightsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * AirplaneHistory
@@ -42,16 +43,30 @@ class AirplaneHistory
 
 
     /**
-     * @ORM\Column(name="airport_departures",  type="string", length=600)
+     * @ORM\Column(name="airport_departures",  type="string")
+     *
+     * @Assert\Length(
+     *      min = 3,
+     *      max = 500,
+     *      minMessage = "Name of manufacturer must be at least {{ limit }} characters long",
+     *      maxMessage = "Name of manufacturer cannot be longer than {{ limit }} characters"
+     * )
      */
     private $airportDepartures;
 
 
     /**
      * @ORM\Column(name="flight_duration", type="time")
+     *
+     * @Assert\Time()
      */
     private $flightDuration;
 
+
+    public function __toString()
+    {
+        return "Airport departures: " .$this->airportDepartures . ", flight duration: " . $this->flightDuration;
+    }
 
 
     /**
