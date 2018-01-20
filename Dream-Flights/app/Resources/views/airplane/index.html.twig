@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Airplanes list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Production</th>
+                <th>Manufacturer</th>
+                <th>Model</th>
+                <th>Max Passanger</th>
+                <th>Max carry capacity in tons</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for airplane in airplanes %}
+            <tr>
+
+                <td>{{ airplane.id }}</td>
+                <td>{{ airplane.name }}</td>
+                <td>{% if airplane.production %}{{ airplane.production|date('Y-m-d') }}{% endif %}</td>
+                <td>{{ airplane.manufacturer }}</td>
+                <td>{{ airplane.model }}</td>
+                <td>{{ airplane.maxPassanger }}</td>
+                <td>{{ airplane.maxCarrCapacityInTons }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('airplane_delete', { 'id': airplane.id }) }}">delete</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('airplane_edit', { 'id': airplane.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('airplane_new') }}">Create a new airplane</a>
+        </li>
+    </ul>
+{% endblock %}

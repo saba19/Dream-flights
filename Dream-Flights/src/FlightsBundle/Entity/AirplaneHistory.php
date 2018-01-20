@@ -18,6 +18,7 @@ class AirplaneHistory
     /**
      * @ORM\ManyToOne(targetEntity="Airplane", inversedBy="airplaneHistories")
      * @ORM\JoinColumn(name="airplane_id", referencedColumnName="id")
+     * @Assert\NotBlank
      */
     private $airplane;
 
@@ -58,7 +59,7 @@ class AirplaneHistory
     /**
      * @ORM\Column(name="flight_duration", type="time")
      *
-     * @Assert\Time()
+     *
      */
     private $flightDuration;
 

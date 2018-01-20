@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Airplanehistories list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Airplane name</th>
+                <th>Departure Airport</th>
+                <th>Flight duration</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for airplaneHistory in airplaneHistories %}
+            <tr>
+                <td>{{ airplaneHistory.id }}</td>
+                <td>{{ airplaneHistory.airplane }}</td>
+                <td>{{ airplaneHistory.airportDepartures }}</td>
+                <td>{% if airplaneHistory.flightDuration %}{{ airplaneHistory.flightDuration|date('H:i:s') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('airplanehistory_delete', { 'id': airplaneHistory.id }) }}">delete</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('airplanehistory_edit', { 'id': airplaneHistory.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('airplanehistory_new') }}">Create a new airplaneHistory</a>
+        </li>
+    </ul>
+{% endblock %}

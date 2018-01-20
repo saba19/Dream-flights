@@ -104,9 +104,10 @@ class Airplane
      */
     private $maxCarrCapacityInTons;
 
-
-
-    
+    public function __toString()
+    {
+        return $this->name;
+    }
 
 
     /**
