@@ -5,8 +5,9 @@ namespace FlightsBundle\Controller;
 use FlightsBundle\Entity\AirplaneHistory;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
-
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 /**
  * Airplanehistory controller.
  *
@@ -57,27 +58,13 @@ class AirplaneHistoryController extends Controller
         ));
     }
 
-//    /**
-//     * Finds and displays a airplaneHistory entity.
-//     *
-//     * @Route("/{id}", name="airplanehistory_show")
-//     * @Method("GET")
-//     */
-//    public function showAction(AirplaneHistory $airplaneHistory)
-//    {
-//        $deleteForm = $this->createDeleteForm($airplaneHistory);
-//
-//        return $this->render('airplanehistory/show.html.twig', array(
-//            'airplaneHistory' => $airplaneHistory,
-//            'delete_form' => $deleteForm->createView(),
-//        ));
-//    }
 
     /**
      * Displays a form to edit an existing airplaneHistory entity.
      *
      * @Route("/{id}/edit", name="airplanehistory_edit")
      * @Method({"GET", "POST"})
+     * @Security("has_role('ROLE_USER')")
      */
     public function editAction(Request $request, AirplaneHistory $airplaneHistory)
     {
@@ -100,7 +87,7 @@ class AirplaneHistoryController extends Controller
 
     /**
      * @Route("/{id}/delete/", name="airplanehistory_delete")
-     *
+     * @Security("has_role('ROLE_USER')")
      */
     public function deleteAction($id)
     {

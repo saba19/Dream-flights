@@ -5,7 +5,9 @@ namespace FlightsBundle\Controller;
 use FlightsBundle\Entity\Airplane;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 /**
  * Airplane controller.
@@ -63,6 +65,7 @@ class AirplaneController extends Controller
      *
      * @Route("/{id}/edit", name="airplane_edit")
      * @Method({"GET", "POST"})
+     * @Security("has_role('ROLE_USER')")
      */
     public function editAction(Request $request, Airplane $airplane)
     {
@@ -86,7 +89,7 @@ class AirplaneController extends Controller
 
     /**
      * @Route("/{id}/delete/", name="airplane_delete")
-     *
+     * @Security("has_role('ROLE_USER')")
      */
     public function deleteAction($id)
     {
