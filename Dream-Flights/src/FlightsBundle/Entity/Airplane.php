@@ -23,12 +23,12 @@ class Airplane
     public function __construct()
     {
         $this->airplaneHistories = new ArrayCollection();
-        $this->production = new \DateTime();
+        //$this->production = new \DateTime();
     }
 
     /**
      * @ORM\OneToOne(targetEntity="User", inversedBy="airplane")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $user;
 
@@ -56,8 +56,17 @@ class Airplane
     private $name;
 
     /**
-     * @ORM\Column(name="production", type="date")
+     * @ORM\Column(name="production", type="integer")
      *
+     * @Assert\Length(
+     *      min = 4,
+     *      max = 4,
+     *      exactMessage = "Production year must be exactly {{ limit }} digits long"
+     * )
+     *
+     *@Assert\GreaterThan(
+     *     value = 0
+     * )
      */
     private $production;
 

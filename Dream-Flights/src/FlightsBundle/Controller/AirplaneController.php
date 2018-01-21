@@ -48,7 +48,7 @@ class AirplaneController extends Controller
             $em->persist($airplane);
             $em->flush();
 
-            return $this->redirectToRoute('airplane_index', array('id' => $airplane->getId()));
+            return $this->redirectToRoute('airplane_index');
         }
 
         return $this->render('airplane/new.html.twig', array(
@@ -92,8 +92,15 @@ class AirplaneController extends Controller
     {
         $entityManager = $this->getDoctrine()->getManager();
         $repository = $entityManager->getRepository('FlightsBundle:Airplane');
-        $usersToDelete = $repository->findOneById($id);
-        $entityManager->remove($usersToDelete);
+        $airplane = $repository->findOneById($id);
+
+        $entityManager=$this->getDoctrine()->getManager();
+        $historyRep = $entityManager->getRepository("FlightsBundle:AirplaneHistory");
+        $hitoryAll= $historyRep->findByAirplane($airplane);
+        foreach ($hitoryAll as $history) {
+            $entityManager->remove($history);
+        }
+        $entityManager->remove($airplane);
         $entityManager->flush();
         //$this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Access denied!');
         $url = $this->generateUrl('airplane_index');

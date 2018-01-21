@@ -14,7 +14,8 @@ class AirplaneHistoryType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('airportDepartures')->add('flightDuration')->add('airplane');
-    }/**
+    }
+    /**
      * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)

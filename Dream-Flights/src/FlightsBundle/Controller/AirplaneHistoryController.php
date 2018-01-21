@@ -48,7 +48,7 @@ class AirplaneHistoryController extends Controller
             $em->persist($airplaneHistory);
             $em->flush();
 
-            return $this->redirectToRoute('airplanehistory_show', array('id' => $airplaneHistory->getId()));
+            return $this->redirectToRoute('airplanehistory_index', array('id' => $airplaneHistory->getId()));
         }
 
         return $this->render('airplanehistory/new.html.twig', array(
@@ -57,21 +57,21 @@ class AirplaneHistoryController extends Controller
         ));
     }
 
-    /**
-     * Finds and displays a airplaneHistory entity.
-     *
-     * @Route("/{id}", name="airplanehistory_show")
-     * @Method("GET")
-     */
-    public function showAction(AirplaneHistory $airplaneHistory)
-    {
-        $deleteForm = $this->createDeleteForm($airplaneHistory);
-
-        return $this->render('airplanehistory/show.html.twig', array(
-            'airplaneHistory' => $airplaneHistory,
-            'delete_form' => $deleteForm->createView(),
-        ));
-    }
+//    /**
+//     * Finds and displays a airplaneHistory entity.
+//     *
+//     * @Route("/{id}", name="airplanehistory_show")
+//     * @Method("GET")
+//     */
+//    public function showAction(AirplaneHistory $airplaneHistory)
+//    {
+//        $deleteForm = $this->createDeleteForm($airplaneHistory);
+//
+//        return $this->render('airplanehistory/show.html.twig', array(
+//            'airplaneHistory' => $airplaneHistory,
+//            'delete_form' => $deleteForm->createView(),
+//        ));
+//    }
 
     /**
      * Displays a form to edit an existing airplaneHistory entity.

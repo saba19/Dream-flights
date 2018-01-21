@@ -1,18 +1,20 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
+{% block content %}
+    <br>
     <h1>Airplanes list</h1>
-
-    <table>
+    <br>
+    <div class="margin">
+    <table width="100%"  >
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Name</th>
-                <th>Production</th>
+                <th>Production year</th>
                 <th>Manufacturer</th>
                 <th>Model</th>
                 <th>Max Passanger</th>
-                <th>Max carry capacity in tons</th>
+                <th>Max carrying capacity in tons</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -22,7 +24,7 @@
 
                 <td>{{ airplane.id }}</td>
                 <td>{{ airplane.name }}</td>
-                <td>{% if airplane.production %}{{ airplane.production|date('Y-m-d') }}{% endif %}</td>
+                <td>{% if airplane.production %}{{ airplane.production }}{% endif %}</td>
                 <td>{{ airplane.manufacturer }}</td>
                 <td>{{ airplane.model }}</td>
                 <td>{{ airplane.maxPassanger }}</td>
@@ -30,7 +32,7 @@
                 <td>
                     <ul>
                         <li>
-                            <a href="{{ path('airplane_delete', { 'id': airplane.id }) }}">delete</a>
+                            <a href="{{ path('airplane_delete', { 'id': airplane.id }) }}" onclick="return confirm('Are u sure? Deleting airplane you also delete all Airplanes History')">delete</a>
                         </li>
                         <li>
                             <a href="{{ path('airplane_edit', { 'id': airplane.id }) }}">edit</a>
@@ -47,4 +49,5 @@
             <a href="{{ path('airplane_new') }}">Create a new airplane</a>
         </li>
     </ul>
+    </div>
 {% endblock %}

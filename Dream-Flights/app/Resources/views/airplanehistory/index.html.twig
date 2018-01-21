@@ -1,9 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
-    <h1>Airplanehistories list</h1>
-
-    <table>
+{% block content %}
+    <br>
+    <h2>Airplanes Histories</h2>
+    <br>
+    <table width="100%">
         <thead>
             <tr>
                 <th>Id</th>
@@ -19,7 +20,7 @@
                 <td>{{ airplaneHistory.id }}</td>
                 <td>{{ airplaneHistory.airplane }}</td>
                 <td>{{ airplaneHistory.airportDepartures }}</td>
-                <td>{% if airplaneHistory.flightDuration %}{{ airplaneHistory.flightDuration|date('H:i:s') }}{% endif %}</td>
+                <td>{% if airplaneHistory.flightDuration %}{{ airplaneHistory.flightDuration|date('H:i') }}{% endif %}</td>
                 <td>
                     <ul>
                         <li>

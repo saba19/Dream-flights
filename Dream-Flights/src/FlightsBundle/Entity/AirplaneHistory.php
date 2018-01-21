@@ -66,7 +66,7 @@ class AirplaneHistory
 
     public function __toString()
     {
-        return "Airport departures: " .$this->airportDepartures . ", flight duration: " . $this->flightDuration;
+        return $this->flightDuration;
     }
 
 
