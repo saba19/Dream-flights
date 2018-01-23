@@ -5,7 +5,7 @@ namespace FlightsBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-use FlightsBundle\Entity\User;
+
 
 /**
  * Airplane
@@ -26,11 +26,6 @@ class Airplane
         //$this->production = new \DateTime();
     }
 
-    /**
-     * @ORM\OneToOne(targetEntity="User", inversedBy="airplane")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE")
-     */
-    private $user;
 
 
     /**
@@ -307,27 +302,5 @@ class Airplane
         return $this->airplaneHistories;
     }
 
-    /**
-     * Set user
-     *
-     * @param \FlightsBundle\Entity\User $user
-     *
-     * @return Airplane
-     */
-    public function setUser(\FlightsBundle\Entity\User $user = null)
-    {
-        $this->user = $user;
 
-        return $this;
-    }
-
-    /**
-     * Get user
-     *
-     * @return \FlightsBundle\Entity\User
-     */
-    public function getUser()
-    {
-        return $this->user;
-    }
 }

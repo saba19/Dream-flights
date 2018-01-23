@@ -5,8 +5,7 @@ namespace FlightsBundle\Entity;
 
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\ArrayCollection;
-use FlightsBundle\Entity\Airplane;
+
 
 /**
  * @ORM\Entity
@@ -14,10 +13,6 @@ use FlightsBundle\Entity\Airplane;
  */
 class User extends BaseUser
 {
-    /**
-     * @ORM\OneToMany(targetEntity="Airplane", mappedBy="users")
-     */
-    private $airplane;
 
 
     /**
@@ -32,42 +27,17 @@ class User extends BaseUser
     public function __construct()
     {
         parent::__construct();
-        $this->airplane= new ArrayCollection();
 
-    }
-
-
-    /**
-     * Add airplane
-     *
-     * @param \FlightsBundle\Entity\Airplane $airplane
-     *
-     * @return User
-     */
-    public function addAirplane(\FlightsBundle\Entity\Airplane $airplane)
-    {
-        $this->airplane[] = $airplane;
-
-        return $this;
     }
 
     /**
-     * Remove airplane
-     *
-     * @param \FlightsBundle\Entity\Airplane $airplane
+     * @return mixed
      */
-    public function removeAirplane(\FlightsBundle\Entity\Airplane $airplane)
+    public function getId()
     {
-        $this->airplane->removeElement($airplane);
+        return $this->id;
     }
 
-    /**
-     * Get airplane
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getAirplane()
-    {
-        return $this->airplane;
-    }
+
+
 }
